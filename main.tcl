@@ -37,13 +37,29 @@ for {set i 0} {$i <= 28} {incr i} {
         set n($i) [$ns node]
 }
 
-### CREATE LINKS ###
+### CREATE LINKS ### 
 
-# orange link
+# Orange Links --------------------------------------------------------
 
-# purple link
+#links between 0 --> 13,14,15,16
 
-# black link
+#links between 1 --> 7,8,9,10,11,12
+
+#links between 4 --> 17,18,19,20
+
+#links between 5 --> 21,22,23,24
+
+#links between 6 --> 25,26,27,28
+
+# Purple Links ---------------------------------------------------------
+
+#link between 2 and 4
+
+#link between 3 --> 5, 6
+
+# Black Link -----------------------------------------------------------
+
+#links between 0 --> 1 --> 3 --> 2 --> 0
 
 ### CREATE AGENTS ###
 
