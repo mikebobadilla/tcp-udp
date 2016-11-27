@@ -61,11 +61,11 @@ $ns attach-agent $n14 $udp1
 
 # number 12
 set tcp0 [new Agent/TCP]
-$ns attach-agent $n14 $tcp0
+$ns attach-agent $n12 $tcp0
 
 # number 13
 set tcp1 [new Agent/TCP]
-$ns attach-agent $n14 $tcp1
+$ns attach-agent $n13 $tcp1
 
 ### CREATE LOSS MONITORS ###
 
