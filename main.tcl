@@ -32,8 +32,20 @@ $ns rtproto DV
 set tracefd [open main.tr w]
 $ns trace-all $tracefd
 
+#Define a 'finish' procedure
+proc finish {} {
+        global ns nf
+
+        $ns flush-trace
+ #Close the trace file
+ #       close $nf
+
+        exit 0
+}
+
 #create nodes
-for {set i 0} {$i <= 28} {incr i} {
+
+for {set i 0} {$i < 29} {incr i} {
         set n($i) [$ns node]
 }
 
@@ -42,103 +54,103 @@ for {set i 0} {$i <= 28} {incr i} {
 # Orange Links --------------------------------------------------------
 
 #links between 0 --> 13,14,15,16
-$ns duplex-link $n0 $n13 1Mb 20ms DropTail
-$ns queue-limit $n0 $n13 10
+$ns duplex-link $n(0) $n(13) 1Mb 20ms DropTail
+$ns queue-limit $n(0) $n(13) 10
 
-$ns duplex-link $n0 $n14 1Mb 20ms DropTail
-$ns queue-limit $n0 $n14 10
+$ns duplex-link $n(0) $n(14) 1Mb 20ms DropTail
+$ns queue-limit $n(0) $n(14) 10
 
-$ns duplex-link $n0 $n15 1Mb 20ms DropTail
-$ns queue-limit $n0 $n15 10
+$ns duplex-link $n(0) $n(15) 1Mb 20ms DropTail
+$ns queue-limit $n(0) $n(15) 10
 
-$ns duplex-link $n0 $n16 1Mb 20ms DropTail
-$ns queue-limit $n0 $n16 10
+$ns duplex-link $n(0) $n(16) 1Mb 20ms DropTail
+$ns queue-limit $n(0) $n(16) 10
 
 #links between 1 --> 7,8,9,10,11,12
-$ns duplex-link $n1 $n7 1Mb 20ms DropTail
-$ns queue-limit $n1 $n7 10
+$ns duplex-link $n(1) $n(7) 1Mb 20ms DropTail
+$ns queue-limit $n(1) $n(7) 10
 
-$ns duplex-link $n1 $n8 1Mb 20ms DropTail
-$ns queue-limit $n1 $n8 10
+$ns duplex-link $n(1) $n(8) 1Mb 20ms DropTail
+$ns queue-limit $n(1) $n(8) 10
 
-$ns duplex-link $n1 $n9 1Mb 20ms DropTail
-$ns queue-limit $n1 $n9 10
+$ns duplex-link $n(1) $n(9) 1Mb 20ms DropTail
+$ns queue-limit $n(1) $n(9) 10
 
-$ns duplex-link $n1 $n10 1Mb 20ms DropTail
-$ns queue-limit $n1 $n10 10
+$ns duplex-link $n(1) $n(10) 1Mb 20ms DropTail
+$ns queue-limit $n(1) $n(10) 10
 
-$ns duplex-link $n1 $n11 1Mb 20ms DropTail
-$ns queue-limit $n1 $n11 10
+$ns duplex-link $n(1) $n(11) 1Mb 20ms DropTail
+$ns queue-limit $n(1) $n(11) 10
 
-$ns duplex-link $n1 $n12 1Mb 20ms DropTail
-$ns queue-limit $n1 $n12 10
+$ns duplex-link $n(1) $n(12) 1Mb 20ms DropTail
+$ns queue-limit $n(1) $n(12) 10
 
 #links between 4 --> 17,18,19,20
-$ns duplex-link $n4 $n17 1Mb 20ms DropTail
-$ns queue-limit $n4 $n17 10
+$ns duplex-link $n(4) $n(17) 1Mb 20ms DropTail
+$ns queue-limit $n(4) $n(17) 10
 
-$ns duplex-link $n4 $n18 1Mb 20ms DropTail
-$ns queue-limit $n4 $n18 10
+$ns duplex-link $n(4) $n(18) 1Mb 20ms DropTail
+$ns queue-limit $n(4) $n(18) 10
 
-$ns duplex-link $n4 $n19 1Mb 20ms DropTail
-$ns queue-limit $n4 $n19 10
+$ns duplex-link $n(4) $n(19) 1Mb 20ms DropTail
+$ns queue-limit $n(4) $n(19) 10
 
-$ns duplex-link $n4 $n20 1Mb 20ms DropTail
-$ns queue-limit $n4 $n20 10
+$ns duplex-link $n(4) $n(20) 1Mb 20ms DropTail
+$ns queue-limit $n(4) $n(20) 10
 
 #links between 5 --> 21,22,23,24
-$ns duplex-link $n5 $n21 1Mb 20ms DropTail
-$ns queue-limit $n5 $n21 10
+$ns duplex-link $n(5) $n(21) 1Mb 20ms DropTail
+$ns queue-limit $n(5) $n(21) 10
 
-$ns duplex-link $n5 $n22 1Mb 20ms DropTail
-$ns queue-limit $n5 $n22 10
+$ns duplex-link $n(5) $n(22) 1Mb 20ms DropTail
+$ns queue-limit $n(5) $n(22) 10
 
-$ns duplex-link $n5 $n23 1Mb 20ms DropTail
-$ns queue-limit $n5 $n23 10
+$ns duplex-link $n(5) $n(23) 1Mb 20ms DropTail
+$ns queue-limit $n(5) $n(23) 10
 
-$ns duplex-link $n5 $n24 1Mb 20ms DropTail
-$ns queue-limit $n5 $n24 10
+$ns duplex-link $n(5) $n(24) 1Mb 20ms DropTail
+$ns queue-limit $n(5) $n(24) 10
 
 #links between 6 --> 25,26,27,28
-$ns duplex-link $n6 $n25 1Mb 20ms DropTail
-$ns queue-limit $n6 $n25 10
+$ns duplex-link $n(6) $n(25) 1Mb 20ms DropTail
+$ns queue-limit $n(6) $n(25) 10
 
-$ns duplex-link $n6 $n26 1Mb 20ms DropTail
-$ns queue-limit $n6 $n26 10
+$ns duplex-link $n(6) $n(26) 1Mb 20ms DropTail
+$ns queue-limit $n(6) $n(26) 10
 
-$ns duplex-link $n6 $n27 1Mb 20ms DropTail
-$ns queue-limit $n6 $n27 10
+$ns duplex-link $n(6) $n(27) 1Mb 20ms DropTail
+$ns queue-limit $n(6) $n(27) 10
 
-$ns duplex-link $n6 $n28 1Mb 20ms DropTail
-$ns queue-limit $n6 $n28 10
+$ns duplex-link $n(6) $n(28) 1Mb 20ms DropTail
+$ns queue-limit $n(6) $n(28) 10
 
 # Purple Links ---------------------------------------------------------
 
 #link between 2 and 4
-$ns duplex-link $n2 $n4 2Mb 40ms DropTail
-$ns queue-limit $n2 $n4 15
+$ns duplex-link $n(2) $n(4) 2Mb 40ms DropTail
+$ns queue-limit $n(2) $n(4) 15
 
 #link between 3 --> 5, 6
-$ns duplex-link $n3 $n5 2Mb 40ms DropTail
-$ns queue-limit $n3 $n5 15
+$ns duplex-link $n(3) $n(5) 2Mb 40ms DropTail
+$ns queue-limit $n(3) $n(5) 15
 
-$ns duplex-link $n3 $n6 2Mb 40ms DropTail
-$ns queue-limit $n3 $n6 15
+$ns duplex-link $n(3) $n(6) 2Mb 40ms DropTail
+$ns queue-limit $n(3) $n(6) 15
 
 # Black Link -----------------------------------------------------------
 
 #links between 0 --> 1 --> 3 --> 2 --> 0
-$ns duplex-link $n0 $n1 8Mb 50ms DropTail
-$ns queue-limit $n0 $n1 20
+$ns duplex-link $n(0) $n(1) 8Mb 50ms DropTail
+$ns queue-limit $n(0) $n(1) 20
 
-$ns duplex-link $n1 $n3 8Mb 50ms DropTail
-$ns queue-limit $n1 $n3 20
+$ns duplex-link $n(1) $n(3) 8Mb 50ms DropTail
+$ns queue-limit $n(1) $n(3) 20
 
-$ns duplex-link $n3 $n2 8Mb 50ms DropTail
-$ns queue-limit $n3 $n2 20
+$ns duplex-link $n(3) $n(2) 8Mb 50ms DropTail
+$ns queue-limit $n(3) $n(2) 20
 
-$ns duplex-link $n2 $n0 8Mb 50ms DropTail
-$ns queue-limit $n2 $n0 20
+$ns duplex-link $n(2) $n(0) 8Mb 50ms DropTail
+$ns queue-limit $n(2) $n(0) 20
 
 ### CREATE AGENTS ###
 
@@ -146,21 +158,21 @@ $ns queue-limit $n2 $n0 20
 
 # number 7
 set udp0 [new Agent/UDP]
-$ns attach-agent $n7 $udp0
+$ns attach-agent $n(7) $udp0
 
 # number 14
 set udp1 [new Agent/UDP]
-$ns attach-agent $n14 $udp1
+$ns attach-agent $n(14) $udp1
 
 # CREATE TCP AGENTS
 
 # number 12
 set tcp0 [new Agent/TCP]
-$ns attach-agent $n12 $tcp0
+$ns attach-agent $n(12) $tcp0
 
 # number 13
 set tcp1 [new Agent/TCP]
-$ns attach-agent $n13 $tcp1
+$ns attach-agent $n(13) $tcp1
 
 ### CREATE LOSS MONITORS ###
 
@@ -195,7 +207,7 @@ $cbr0 set interval_ 0.005
 $cbr0 set random_ 1
 $cbr0 attach-agent $udp0
 
-# create exp over udp traffic --> #24 (time 2)
+# create exp over udp traffic --> #14 (time 2)
 set exp0 [new Application/Traffic/Exponential]
 $exp0 set packetSize_ 2000
 $exp0 set burst_time_ 0.5s
@@ -204,13 +216,13 @@ $exp0 set rate_ 2000k
 $exp0 attach-agent $udp1
 
 # create cbr over tcp traffic --> #12 (time 3) & #13 (time 4)
-set cbr1 [new Application/Traffic/TCP]
+set cbr1 [new Application/Traffic/CBR]
 $cbr1 set packetSize_ 1000
 $cbr1 set interval_ 0.005
 $cbr1 set random_ 1
 $cbr1 attach-agent $tcp0
 
-set cbr2 [new Application/Traffic/TCP]
+set cbr2 [new Application/Traffic/CBR]
 $cbr2 set packetSize_ 1000
 $cbr2 set interval_ 0.005
 $cbr2 set random_ 1
@@ -219,9 +231,22 @@ $cbr2 attach-agent $tcp1
 
 #### USE FOR TIME 6 #### CODE FROM EXAMPLE 4 --> REMOVE BEFORE SUBMITTING ####
 #Schedule events for the CBR agent and the network dynamics
-# $ns at 0.5 "$cbr0 start"
-# $ns rtmodel-at 1.0 down $n(1) $n(2)
-# $ns rtmodel-at 2.0 up $n(1) $n(2)
-# $ns at 4.5 "$cbr0 stop"
-# Call the finish procedure after 5 seconds of simulation time
-# $ns at 5.0 "finish"
+$ns at 1 "$cbr0 start"
+#$ns rtmodel-at 1.0 down $n(1) $n(2)
+#$ns rtmodel-at 2.0 up $n(1) $n(2)
+$ns at 10 "$cbr0 stop"
+$ns at 3 "$cbr1 start"
+#$ns rtmodel-at 1.0 down $n(1) $n(2)
+#$ns rtmodel-at 2.0 up $n(1) $n(2)
+$ns at 10 "$cbr1 stop"
+$ns at 4 "$cbr2 start"
+#$ns rtmodel-at 1.0 down $n(1) $n(2)
+#$ns rtmodel-at 2.0 up $n(1) $n(2)
+$ns at 10 "$cbr2 stop"
+$ns at 2 "$exp0 start"
+#$ns rtmodel-at 1.0 down $n(1) $n(2)
+#$ns rtmodel-at 2.0 up $n(1) $n(2)
+$ns at 10 "$exp0 stop"
+#Call the finish procedure after 5 seconds of simulation time
+$ns at 10.0 "finish"
+$ns run
