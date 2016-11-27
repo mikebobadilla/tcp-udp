@@ -37,29 +37,108 @@ for {set i 0} {$i <= 28} {incr i} {
         set n($i) [$ns node]
 }
 
-### CREATE LINKS ### 
+### CREATE LINKS ###
 
 # Orange Links --------------------------------------------------------
 
 #links between 0 --> 13,14,15,16
+$ns duplex-link $n0 $n13 1Mb 20ms DropTail
+$ns queue-limit $n0 $n13 10
+
+$ns duplex-link $n0 $n14 1Mb 20ms DropTail
+$ns queue-limit $n0 $n14 10
+
+$ns duplex-link $n0 $n15 1Mb 20ms DropTail
+$ns queue-limit $n0 $n15 10
+
+$ns duplex-link $n0 $n16 1Mb 20ms DropTail
+$ns queue-limit $n0 $n16 10
 
 #links between 1 --> 7,8,9,10,11,12
+$ns duplex-link $n1 $n7 1Mb 20ms DropTail
+$ns queue-limit $n1 $n7 10
+
+$ns duplex-link $n1 $n8 1Mb 20ms DropTail
+$ns queue-limit $n1 $n8 10
+
+$ns duplex-link $n1 $n9 1Mb 20ms DropTail
+$ns queue-limit $n1 $n9 10
+
+$ns duplex-link $n1 $n10 1Mb 20ms DropTail
+$ns queue-limit $n1 $n10 10
+
+$ns duplex-link $n1 $n11 1Mb 20ms DropTail
+$ns queue-limit $n1 $n11 10
+
+$ns duplex-link $n1 $n12 1Mb 20ms DropTail
+$ns queue-limit $n1 $n12 10
 
 #links between 4 --> 17,18,19,20
+$ns duplex-link $n4 $n17 1Mb 20ms DropTail
+$ns queue-limit $n4 $n17 10
+
+$ns duplex-link $n4 $n18 1Mb 20ms DropTail
+$ns queue-limit $n4 $n18 10
+
+$ns duplex-link $n4 $n19 1Mb 20ms DropTail
+$ns queue-limit $n4 $n19 10
+
+$ns duplex-link $n4 $n20 1Mb 20ms DropTail
+$ns queue-limit $n4 $n20 10
 
 #links between 5 --> 21,22,23,24
+$ns duplex-link $n5 $n21 1Mb 20ms DropTail
+$ns queue-limit $n5 $n21 10
+
+$ns duplex-link $n5 $n22 1Mb 20ms DropTail
+$ns queue-limit $n5 $n22 10
+
+$ns duplex-link $n5 $n23 1Mb 20ms DropTail
+$ns queue-limit $n5 $n23 10
+
+$ns duplex-link $n5 $n24 1Mb 20ms DropTail
+$ns queue-limit $n5 $n24 10
 
 #links between 6 --> 25,26,27,28
+$ns duplex-link $n6 $n25 1Mb 20ms DropTail
+$ns queue-limit $n6 $n25 10
+
+$ns duplex-link $n6 $n26 1Mb 20ms DropTail
+$ns queue-limit $n6 $n26 10
+
+$ns duplex-link $n6 $n27 1Mb 20ms DropTail
+$ns queue-limit $n6 $n27 10
+
+$ns duplex-link $n6 $n28 1Mb 20ms DropTail
+$ns queue-limit $n6 $n28 10
 
 # Purple Links ---------------------------------------------------------
 
 #link between 2 and 4
+$ns duplex-link $n2 $n4 2Mb 40ms DropTail
+$ns queue-limit $n2 $n4 15
 
 #link between 3 --> 5, 6
+$ns duplex-link $n3 $n5 2Mb 40ms DropTail
+$ns queue-limit $n3 $n5 15
+
+$ns duplex-link $n3 $n6 2Mb 40ms DropTail
+$ns queue-limit $n3 $n6 15
 
 # Black Link -----------------------------------------------------------
 
 #links between 0 --> 1 --> 3 --> 2 --> 0
+$ns duplex-link $n0 $n1 8Mb 50ms DropTail
+$ns queue-limit $n0 $n1 20
+
+$ns duplex-link $n1 $n3 8Mb 50ms DropTail
+$ns queue-limit $n1 $n3 20
+
+$ns duplex-link $n3 $n2 8Mb 50ms DropTail
+$ns queue-limit $n3 $n2 20
+
+$ns duplex-link $n2 $n0 8Mb 50ms DropTail
+$ns queue-limit $n2 $n0 20
 
 ### CREATE AGENTS ###
 
