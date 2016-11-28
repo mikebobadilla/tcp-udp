@@ -178,25 +178,41 @@ $ns attach-agent $n(13) $tcp1
 
 # Red
 set sink0 [new Agent/LossMonitor]
+$ns attach-agent $n15 $sink0
 set sink1 [new Agent/LossMonitor]
+$ns attach-agent $n16 $sink1
 set sink2 [new Agent/LossMonitor]
+$ns attach-agent $n17 $sink2
 set sink3 [new Agent/LossMonitor]
+$ns attach-agent $n19 $sink3
 set sink4 [new Agent/LossMonitor]
+$ns attach-agent $n21 $sink4
 set sink5 [new Agent/LossMonitor]
+$ns attach-agent $n24 $sink5
 set sink6 [new Agent/LossMonitor]
+$ns attach-agent $n25 $sink6
 set sink7 [new Agent/LossMonitor]
+$ns attach-agent $n26 $sink7
 # Blue
 set sink8 [new Agent/LossMonitor]
+$ns attach-agent $n8 $sink8
 set sink9 [new Agent/LossMonitor]
+$ns attach-agent $n9 $sink9
 set sink10 [new Agent/LossMonitor]
+$ns attach-agent $n11 $sink10
 set sink11 [new Agent/LossMonitor]
+$ns attach-agent $n18 $sink11
 set sink12 [new Agent/LossMonitor]
+$ns attach-agent $n20 $sink12
 set sink13 [new Agent/LossMonitor]
+$ns attach-agent $n23 $sink13
 set sink14 [new Agent/LossMonitor]
+$ns attach-agent $n27 $sink14
 # Green
 set sink15 [new Agent/LossMonitor]
+$ns attach-agent $n28 $sink15
 set sink16 [new Agent/LossMonitor]
-
+$ns attach-agent $n28 $sink16
 
 # CREATE TRAFFIC SOURCES
 
@@ -228,6 +244,31 @@ $cbr2 set interval_ 0.005
 $cbr2 set random_ 1
 $cbr2 attach-agent $tcp1
 
+#Connect the traffic source with the "consumer"
+
+#UDP0 / RED
+$ns connect $udp0 $sink0
+$ns connect $udp0 $sink1
+$ns connect $udp0 $sink2
+$ns connect $udp0 $sink3
+$ns connect $udp0 $sink4
+$ns connect $udp0 $sink5
+$ns connect $udp0 $sink6
+$ns connect $udp0 $sink7
+
+#UDP1 / BLUE
+$ns connect $udp1 $sink8
+$ns connect $udp1 $sink9
+$ns connect $udp1 $sink10
+$ns connect $udp1 $sink11
+$ns connect $udp1 $sink12
+$ns connect $udp1 $sink13
+$ns connect $udp1 $sink14
+
+#TCP0 and TCP1 / GREEN
+
+$ns connect $tcp0 $sink15
+$ns connect $tcp1 $sink16
 
 #### USE FOR TIME 6 #### CODE FROM EXAMPLE 4 --> REMOVE BEFORE SUBMITTING ####
 #Schedule events for the CBR agent and the network dynamics
