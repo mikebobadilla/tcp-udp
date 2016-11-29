@@ -159,20 +159,24 @@ $ns queue-limit $n(2) $n(0) 20
 # number 7
 set udp0 [new Agent/UDP]
 $ns attach-agent $n(7) $udp0
+$udp0 set fid_ 7
 
 # number 14
 set udp1 [new Agent/UDP]
 $ns attach-agent $n(14) $udp1
+$udp0 set fid_ 14
 
 # CREATE TCP AGENTS
 
 # number 12
 set tcp0 [new Agent/TCP]
 $ns attach-agent $n(12) $tcp0
+$udp0 set fid_ 12
 
 # number 13
 set tcp1 [new Agent/TCP]
 $ns attach-agent $n(13) $tcp1
+$udp0 set fid_ 13
 
 ### CREATE LOSS MONITORS ###
 
