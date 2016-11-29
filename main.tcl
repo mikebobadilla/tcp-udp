@@ -273,20 +273,17 @@ $ns connect $tcp1 $sink16
 #### USE FOR TIME 6 #### CODE FROM EXAMPLE 4 --> REMOVE BEFORE SUBMITTING ####
 #Schedule events for the CBR agent and the network dynamics
 $ns at 1 "$cbr0 start"
-#$ns rtmodel-at 1.0 down $n(1) $n(2)
-#$ns rtmodel-at 2.0 up $n(1) $n(2)
 $ns at 10 "$cbr0 stop"
+
 $ns at 3 "$cbr1 start"
-#$ns rtmodel-at 1.0 down $n(1) $n(2)
-#$ns rtmodel-at 2.0 up $n(1) $n(2)
 $ns at 10 "$cbr1 stop"
+
 $ns at 4 "$cbr2 start"
-#$ns rtmodel-at 1.0 down $n(1) $n(2)
-#$ns rtmodel-at 2.0 up $n(1) $n(2)
 $ns at 10 "$cbr2 stop"
+
 $ns at 2 "$exp0 start"
-#$ns rtmodel-at 1.0 down $n(1) $n(2)
-#$ns rtmodel-at 2.0 up $n(1) $n(2)
+$ns rtmodel-at 6.0 down $n(2) $n(3)
+$ns rtmodel-at 7.0 up $n(2) $n(3)
 $ns at 10 "$exp0 stop"
 #Call the finish procedure after 5 seconds of simulation time
 $ns at 10.0 "finish"
