@@ -171,12 +171,12 @@ $udp0 set fid_ 14
 # number 12
 set tcp0 [new Agent/TCP]
 $ns attach-agent $n(12) $tcp0
-$udp0 set fid_ 12
+$tcp0 set fid_ 12
 
 # number 13
 set tcp1 [new Agent/TCP]
 $ns attach-agent $n(13) $tcp1
-$udp0 set fid_ 13
+$tcp1 set fid_ 13
 
 ### CREATE LOSS MONITORS ###
 
