@@ -220,20 +220,50 @@ $ns attach-agent $n(28) $sink16
 
 # CREATE TRAFFIC SOURCES
 
-# create cbr over udp traffic --> #7 (time 1)
-set cbr0 [new Application/Traffic/CBR]
-$cbr0 set packetSize_ 1500
-$cbr0 set interval_ 0.005
-$cbr0 set random_ 1
-$cbr0 attach-agent $udp0
+proc attach-expoo-traffic { node sink size burst idle rate } {
+	#Get an instance of the simulator
+	set ns [Simulator instance]
 
-# create exp over udp traffic --> #14 (time 2)
-set exp0 [new Application/Traffic/Exponential]
-$exp0 set packetSize_ 2000
-$exp0 set burst_time_ 0.5s
-$exp0 set idle_time_ 0.5s
-$exp0 set rate_ 2000k
-$exp0 attach-agent $udp1
+	#Create a UDP agent and attach it to the node
+	set source [new Agent/UDP]
+	$ns attach-agent $node $source
+
+	#Create an Expoo traffic agent and set its configuration parameters
+	set traffic [new Application/Traffic/Exponential]
+	$traffic set packetSize_ $size
+	$traffic set burst_time_ $burst
+	$traffic set idle_time_ $idle
+	$traffic set rate_ $rate
+
+  # Attach traffic source to the traffic generator
+  $traffic attach-agent $source
+
+	#Connect the source and the sink
+	$ns connect $source $sink
+	return $traffic
+}
+
+proc attach-cbr-traffic { node sink size interval random } {
+	#Get an instance of the simulator
+	set ns [Simulator instance]
+
+	#Create a UDP agent and attach it to the node
+	set source [new Agent/UDP]
+	$ns attach-agent $node $source
+
+	#Create an Expoo traffic agent and set its configuration parameters
+	set traffic [new Application/Traffic/CBR]
+	$traffic set packetSize_ $size
+	$traffic set interval_ $interval
+	$traffic set random_ $random
+
+  # Attach traffic source to the traffic generator
+  $traffic attach-agent $source
+
+	#Connect the source and the sink
+	$ns connect $source $sink
+	return $traffic
+}
 
 # create cbr over tcp traffic --> #12 (time 3) & #13 (time 4)
 set cbr1 [new Application/Traffic/CBR]
@@ -251,23 +281,23 @@ $cbr2 attach-agent $tcp1
 #Connect the traffic source with the "consumer"
 
 #UDP0 / RED
-$ns connect $udp0 $sink0
-$ns connect $udp0 $sink1
-$ns connect $udp0 $sink2
-$ns connect $udp0 $sink3
-$ns connect $udp0 $sink4
-$ns connect $udp0 $sink5
-$ns connect $udp0 $sink6
-$ns connect $udp0 $sink7
+set source0 [attach-cbr-traffic $n(7) $sink0 1500 0.005 1]
+set source1 [attach-cbr-traffic $n(7) $sink1 1500 0.005 1]
+set source2 [attach-cbr-traffic $n(7) $sink2 1500 0.005 1]
+set source3 [attach-cbr-traffic $n(7) $sink3 1500 0.005 1]
+set source4 [attach-cbr-traffic $n(7) $sink4 1500 0.005 1]
+set source5 [attach-cbr-traffic $n(7) $sink5 1500 0.005 1]
+set source6 [attach-cbr-traffic $n(7) $sink6 1500 0.005 1]
+set source7 [attach-cbr-traffic $n(7) $sink7 1500 0.005 1]
 
 #UDP1 / BLUE
-$ns connect $udp1 $sink8
-$ns connect $udp1 $sink9
-$ns connect $udp1 $sink10
-$ns connect $udp1 $sink11
-$ns connect $udp1 $sink12
-$ns connect $udp1 $sink13
-$ns connect $udp1 $sink14
+set source8 [attach-expoo-traffic $n(14) $sink8 2000 0.5s 0.5s 2000k]
+set source9 [attach-expoo-traffic $n(14) $sink9 2000 0.5s 0.5s 2000k]
+set source10 [attach-expoo-traffic $n(14) $sink10 2000 0.5s 0.5s 2000k]
+set source11 [attach-expoo-traffic $n(14) $sink11 2000 0.5s 0.5s 2000k]
+set source12 [attach-expoo-traffic $n(14) $sink12 2000 0.5s 0.5s 2000k]
+set source13 [attach-expoo-traffic $n(14) $sink13 2000 0.5s 0.5s 2000k]
+set source14 [attach-expoo-traffic $n(14) $sink14 2000 0.5s 0.5s 2000k]
 
 #TCP0 and TCP1 / GREEN
 
@@ -276,8 +306,8 @@ $ns connect $tcp1 $sink16
 
 #### USE FOR TIME 6 #### CODE FROM EXAMPLE 4 --> REMOVE BEFORE SUBMITTING ####
 #Schedule events for the CBR agent and the network dynamics
-$ns at 1 "$cbr0 start"
-$ns at 10 "$cbr0 stop"
+$ns at 1 "$source0 start"
+$ns at 10 "$source0 stop"
 
 $ns at 3 "$cbr1 start"
 $ns at 10 "$cbr1 stop"
@@ -285,10 +315,10 @@ $ns at 10 "$cbr1 stop"
 $ns at 4 "$cbr2 start"
 $ns at 10 "$cbr2 stop"
 
-$ns at 2 "$exp0 start"
+$ns at 2 "$source8 start"
 $ns rtmodel-at 6.0 down $n(2) $n(3)
 $ns rtmodel-at 7.0 up $n(2) $n(3)
-$ns at 10 "$exp0 stop"
+$ns at 10 "$source8 stop"
 #Call the finish procedure after 5 seconds of simulation time
 $ns at 10.0 "finish"
 $ns run
