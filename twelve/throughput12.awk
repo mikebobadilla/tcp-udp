@@ -38,4 +38,13 @@ seq_no = $11;
 
 packet_id = $12;
 
+#some amazing math stuff goes here
+
+}
+
+END {
+
+#print the throughput 
+#printf("number of packets sent:%d lost:%d\n", numFs, fsDrops);
+
 }
