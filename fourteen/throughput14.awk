@@ -9,7 +9,7 @@
 
 
 BEGIN {
-   node = 14;
+   node = 27;
    time1 = 0.0;
    time2 = 0.0;
    num_packets = 0;
@@ -25,7 +25,9 @@ BEGIN {
       bytes_counter = 0;
    }
 
-   if ($1 == "r" && $4 == node && $5 == "cbr") {
+   #if event is recieve and to-node is node 27 and paket type is EXP
+   if ($1 == "r" && $4 == node && $5 == "exp") {
+      #add packet size to bytes_counter
       bytes_counter += $6;
       num_packets++;
    }
