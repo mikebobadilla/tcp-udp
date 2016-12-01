@@ -9,7 +9,7 @@
 
 
 BEGIN {
-   node = 1;
+   node = 14;
    time1 = 0.0;
    time2 = 0.0;
    num_packets = 0;
