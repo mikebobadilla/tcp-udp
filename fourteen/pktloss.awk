@@ -38,12 +38,13 @@ seq_no = $11;
 
 packet_id = $12;
 
-
-if (flow_id==70190 && action == "+")
+#number of packets sent from node 14 to 27
+if (flow_id==140270 && action == "+")
 
 numFs++;
 
-if (flow_id==70190 && action == "d")
+#number of packets dropped from node 14 to 27
+if (flow_id==140270 && action == "d")
 
 fsDrops++;
 
