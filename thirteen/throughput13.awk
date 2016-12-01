@@ -1,41 +1,48 @@
 # This program is used to calculate throughput
 # Usage: $gawk –f example3pktloss.awk example3.tr
 
-
+#Throughput = amount of data per second that can be transferred
+#Rate = bits/second
+#File size = F
+#Total time to revieve all bits = T
+#Average Throughput = F/T * Rate
 
 
 BEGIN {
-
-# Initialization. Set two variables. fsDrops: packets drop. numFs: packets sent
-
-fsDrops = 0;
-
-numFs = 0;
-
+   node = 28;
+   time1 = 0.0;
+   time2 = 0.0;
+   num_packets = 0;
 }
 
 {
+   time2 = $2;
 
-action = $1;
+   if (time2 - time1 > 0.05) {
+      throughput = bytes_counter / (time2 - time1);
+      printf("%f \t %f\n", time2, throughput) > "throughput14.xls";
+      time1 = $2;
+      bytes_counter = 0;
+   }
 
-time = $2;
+   #if event is recieve and to-node is node 27 and paket type is cbr
+   if ($1 == "r" && $4 == node && $5 == "cbr") {
+      #add packet size to bytes_counter
+      bytes_counter += $6;
+      num_packets++;
+   }
+}
 
-from = $3;
+END {
 
-to = $4;
+#print the throughput
+#printf("number of packets sent:%d lost:%d\n", numFs, fsDrops);
 
-type = $5;
+}
 
-pktsize = $6;
+END {
 
-flow_id = $8;
-
-src = $9;
-
-dst = $10;
-
-seq_no = $11;
-
-packet_id = $12;
+#print the throughput
+#printf("number of packets sent:%d lost:%d\n", numFs, fsDrops);
 
 }
