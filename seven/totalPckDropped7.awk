@@ -1,11 +1,7 @@
-# This program is used to calculate throughput
+# This program is used to calculate the total packets dropped
 # Usage: $gawk –f example3pktloss.awk example3.tr
 
-#Throughput = amount of data per second that can be transferred
-#Rate = bits/second
-#File size = F
-#Total time to revieve all bits = T
-#Average Throughput = F/T * Rate
+
 
 
 BEGIN {
@@ -42,13 +38,19 @@ seq_no = $11;
 
 packet_id = $12;
 
-#some amazing math stuff goes here
+
+if (flow_id==70190 && action == "+")
+
+numFs++;
+
+if (flow_id==70190 && action == "d")
+
+fsDrops++;
 
 }
 
 END {
 
-#print the throughput
-#printf("number of packets sent:%d lost:%d\n", numFs, fsDrops);
+printf("number of packets sent:%d lost:%d\n", numFs, fsDrops);
 
 }
