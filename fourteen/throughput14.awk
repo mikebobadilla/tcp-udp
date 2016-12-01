@@ -34,15 +34,7 @@ BEGIN {
 }
 
 END {
-
-#print the throughput
-#printf("number of packets sent:%d lost:%d\n", numFs, fsDrops);
-
-}
-
-END {
-
-#print the throughput
-#printf("number of packets sent:%d lost:%d\n", numFs, fsDrops);
-
+   print("----------");
+   printf("Total number of packets received: \n%d\n", num_packets);
+   print("----------");
 }
