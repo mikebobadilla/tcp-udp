@@ -1,12 +1,4 @@
 # This program is used to calculate throughput
-# Usage: $gawk –f example3pktloss.awk example3.tr
-
-#Throughput = amount of data per second that can be transferred
-#Rate = bits/second
-#File size = F
-#Total time to revieve all bits = T
-#Average Throughput = F/T * Rate
-
 
 BEGIN {
    node = 27;
