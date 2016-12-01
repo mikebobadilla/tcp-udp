@@ -30,8 +30,10 @@ packet_id = $12;
 
 time2 = time;
 
+
 if(time2 - time1 > 0.5)
 {
+
 	if ( packet_id > highest_packet_id ) {
 
 		highest_packet_id = packet_id;
@@ -68,8 +70,8 @@ if(time2 - time1 > 0.5)
 
 		}
 
+		time1 = time;
 	}
-	time1 = time;
 }
 
 
