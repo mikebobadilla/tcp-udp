@@ -171,12 +171,10 @@ $udp0 set fid_ 14
 # number 12
 set tcp0 [new Agent/TCP]
 $ns attach-agent $n(12) $tcp0
-$tcp0 set fid_ 12
 
 # number 13
 set tcp1 [new Agent/TCP]
 $ns attach-agent $n(13) $tcp1
-$tcp1 set fid_ 13
 
 ### CREATE LOSS MONITORS ###
 
@@ -220,7 +218,7 @@ $ns attach-agent $n(28) $sink16
 
 # CREATE TRAFFIC SOURCES
 
-proc attach-expoo-traffic { node sink size burst idle rate } {
+proc attach-expoo-traffic { node sink size burst idle rate fid} {
 	#Get an instance of the simulator
 	set ns [Simulator instance]
 
@@ -240,10 +238,11 @@ proc attach-expoo-traffic { node sink size burst idle rate } {
 
 	#Connect the source and the sink
 	$ns connect $source $sink
+  $source set fid_ $fid
 	return $traffic
 }
 
-proc attach-cbr-traffic { node sink size interval random } {
+proc attach-cbr-traffic { node sink size interval random fid} {
 	#Get an instance of the simulator
 	set ns [Simulator instance]
 
@@ -262,6 +261,7 @@ proc attach-cbr-traffic { node sink size interval random } {
 
 	#Connect the source and the sink
 	$ns connect $source $sink
+  $source set fid_ $fid
 	return $traffic
 }
 
@@ -281,62 +281,67 @@ $cbr2 attach-agent $tcp1
 #Connect the traffic source with the "consumer"
 
 #UDP0 / RED
-set source0 [attach-cbr-traffic $n(7) $sink0 1500 0.005 1]
-set source1 [attach-cbr-traffic $n(7) $sink1 1500 0.005 1]
-set source2 [attach-cbr-traffic $n(7) $sink2 1500 0.005 1]
-set source3 [attach-cbr-traffic $n(7) $sink3 1500 0.005 1]
-set source4 [attach-cbr-traffic $n(7) $sink4 1500 0.005 1]
-set source5 [attach-cbr-traffic $n(7) $sink5 1500 0.005 1]
-set source6 [attach-cbr-traffic $n(7) $sink6 1500 0.005 1]
-set source7 [attach-cbr-traffic $n(7) $sink7 1500 0.005 1]
+set 7to15 [attach-cbr-traffic $n(7) $sink0 1500 0.005 1 0]
+set 7to16 [attach-cbr-traffic $n(7) $sink1 1500 0.005 1 0]
+set 7to17 [attach-cbr-traffic $n(7) $sink2 1500 0.005 1 0]
+set 7to19 [attach-cbr-traffic $n(7) $sink3 1500 0.005 1 70190]
+set 7to21 [attach-cbr-traffic $n(7) $sink4 1500 0.005 1 0]
+set 7to24 [attach-cbr-traffic $n(7) $sink5 1500 0.005 1 0]
+set 7to25 [attach-cbr-traffic $n(7) $sink6 1500 0.005 1 0]
+set 7to26 [attach-cbr-traffic $n(7) $sink7 1500 0.005 1 0]
 
 #UDP1 / BLUE
-set source8 [attach-expoo-traffic $n(14) $sink8 2000 0.5s 0.5s 2000k]
-set source9 [attach-expoo-traffic $n(14) $sink9 2000 0.5s 0.5s 2000k]
-set source10 [attach-expoo-traffic $n(14) $sink10 2000 0.5s 0.5s 2000k]
-set source11 [attach-expoo-traffic $n(14) $sink11 2000 0.5s 0.5s 2000k]
-set source12 [attach-expoo-traffic $n(14) $sink12 2000 0.5s 0.5s 2000k]
-set source13 [attach-expoo-traffic $n(14) $sink13 2000 0.5s 0.5s 2000k]
-set source14 [attach-expoo-traffic $n(14) $sink14 2000 0.5s 0.5s 2000k]
+set 14to8 [attach-expoo-traffic $n(14) $sink8 2000 0.5s 0.5s 2000k 0]
+set 14to9 [attach-expoo-traffic $n(14) $sink9 2000 0.5s 0.5s 2000k 0]
+set 14to11 [attach-expoo-traffic $n(14) $sink10 2000 0.5s 0.5s 2000k 0]
+set 14to18 [attach-expoo-traffic $n(14) $sink11 2000 0.5s 0.5s 2000k 0]
+set 14to29 [attach-expoo-traffic $n(14) $sink12 2000 0.5s 0.5s 2000k 0]
+set 14to23 [attach-expoo-traffic $n(14) $sink13 2000 0.5s 0.5s 2000k 0]
+set 14to27 [attach-expoo-traffic $n(14) $sink14 2000 0.5s 0.5s 2000k 140270]
 
 #TCP0 and TCP1 / GREEN
 
 $ns connect $tcp0 $sink15
+$tcp0 set fid_ 120280
 $ns connect $tcp1 $sink16
+$tcp1 set fid_ 130280
 
 #### USE FOR TIME 6 #### CODE FROM EXAMPLE 4 --> REMOVE BEFORE SUBMITTING ####
 #Schedule events for the CBR agent and the network dynamics
-$ns at 1 "$source0 start"
-$ns at 1 "$source1 start"
-$ns at 1 "$source2 start"
-$ns at 1 "$source3 start"
-$ns at 1 "$source4 start"
-$ns at 1 "$source5 start"
-$ns at 1 "$source6 start"
-$ns at 1 "$source7 start"
-$ns at 1 "$source8 start"
-$ns at 1 "$source9 start"
-$ns at 1 "$source10 start"
-$ns at 1 "$source11 start"
-$ns at 1 "$source12 start"
-$ns at 1 "$source13 start"
-$ns at 1 "$source14 start"
+# RED
+$ns at 1 "$7to15 start"
+$ns at 1 "$7to16 start"
+$ns at 1 "$7to17 start"
+$ns at 1 "$7to19 start"
+$ns at 1 "$7to21 start"
+$ns at 1 "$7to24 start"
+$ns at 1 "$7to25 start"
+$ns at 1 "$7to26 start"
+# BLUE
+$ns at 1 "$14to8 start"
+$ns at 1 "$14to9 start"
+$ns at 1 "$14to11 start"
+$ns at 1 "$14to18 start"
+$ns at 1 "$14to29 start"
+$ns at 1 "$14to23 start"
+$ns at 1 "$14to27 start"
 
-$ns at 10 "$source0 stop"
-$ns at 10 "$source1 stop"
-$ns at 10 "$source2 stop"
-$ns at 10 "$source3 stop"
-$ns at 10 "$source4 stop"
-$ns at 10 "$source5 stop"
-$ns at 10 "$source6 stop"
-$ns at 10 "$source7 stop"
-$ns at 10 "$source8 stop"
-$ns at 10 "$source9 stop"
-$ns at 10 "$source10 stop"
-$ns at 10 "$source11 stop"
-$ns at 10 "$source12 stop"
-$ns at 10 "$source13 stop"
-$ns at 10 "$source14 stop"
+# STOP
+$ns at 10 "$7to15 stop"
+$ns at 10 "$7to16 stop"
+$ns at 10 "$7to17 stop"
+$ns at 10 "$7to19 stop"
+$ns at 10 "$7to21 stop"
+$ns at 10 "$7to24 stop"
+$ns at 10 "$7to25 stop"
+$ns at 10 "$7to26 stop"
+$ns at 10 "$14to8 stop"
+$ns at 10 "$14to9 stop"
+$ns at 10 "$14to11 stop"
+$ns at 10 "$14to18 stop"
+$ns at 10 "$14to29 stop"
+$ns at 10 "$14to23 stop"
+$ns at 10 "$14to27 stop"
 
 
 $ns at 3 "$cbr1 start"
@@ -345,10 +350,8 @@ $ns at 10 "$cbr1 stop"
 $ns at 4 "$cbr2 start"
 $ns at 10 "$cbr2 stop"
 
-$ns at 2 "$source8 start"
 $ns rtmodel-at 6.0 down $n(2) $n(3)
 $ns rtmodel-at 7.0 up $n(2) $n(3)
-$ns at 10 "$source8 stop"
 #Call the finish procedure after 5 seconds of simulation time
 $ns at 10.0 "finish"
 $ns run
