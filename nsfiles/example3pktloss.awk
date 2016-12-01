@@ -39,11 +39,11 @@ seq_no = $11;
 packet_id = $12;
 
 
-if (from==1 && to==2 && action == "+")
+if (flow_id==70190 && action == "+")
 
 numFs++;
 
-if (flow_id==2 && action == "d")
+if (flow_id==70190 && action == "d")
 
 fsDrops++;
 
