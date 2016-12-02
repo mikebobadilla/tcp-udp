@@ -30,31 +30,30 @@ packet_id = $12;
 
 time2 = time;
 
-if(time2 - time1 > 0.5)
-{
-	if ( packet_id > highest_packet_id ) {
 
+
+	if ( packet_id > highest_packet_id && flow_id == 140270) {
 		highest_packet_id = packet_id;
-
 	}
 
 
 	#Record the transmission time
 
+	printf("%f\n", start_time[packet_id])
+
 	if ( start_time[packet_id] == 0 ) {
 
 		# Record the sequence number
 
-		pkt_seqno[packet_id] = seq_no;
-
 		start_time[packet_id] = time;
 
+		pkt_seqno[packet_id] = seq_no;
 	}
 
 
 	#Record the receiving time for CBR (flow_id=2)
 
-	if ( flow_id == 070190 && action != "d" ) {
+	if ( flow_id == 140270 && action != "d" ) {
 
 		if ( action == "r" ) {
 
@@ -68,8 +67,7 @@ if(time2 - time1 > 0.5)
 
 		}
 
-	}
-	time1 = time;
+		time1 = time;
 }
 
 
@@ -107,7 +105,7 @@ jitter = delay_diff/seqno_diff;
 
 }
 
-printf("%f \t %f\n", start, jitter) > "7to19jitter.xls";
+printf("%f \t %f\n", start, jitter) > "14to27jitter.xls";
 
 last_seqno = pkt_seqno[packet_id];
 

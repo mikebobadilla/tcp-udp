@@ -43,7 +43,7 @@ if ( start_time[packet_id] == 0 )
 start_time[packet_id] = time;
 
 
-if ( flow_id == 070190 && action != "d" ) {
+if ( flow_id == 140270 && action != "d" ) {
 
 if ( action == "r" ) {
 
@@ -70,7 +70,7 @@ end = end_time[packet_id];
 packet_duration = end - start;
 
 
-if ( start < end ) printf("%f \t %f\n", start, packet_duration) > "delay7.xls";
+if ( start < end ) printf("%f \t %f\n", start, packet_duration) > "delay14.xls";
 
 }
 
