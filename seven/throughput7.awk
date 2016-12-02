@@ -10,7 +10,7 @@ BEGIN {
 {
    time2 = $2;
 
-   if (time2 - time1 > 0.05) {
+   if (time2 - time1 > 0.5) {
       throughput = bytes_counter / (time2 - time1);
       printf("%f \t %f\n", time2, throughput) > "throughput7.xls";
       time1 = $2;

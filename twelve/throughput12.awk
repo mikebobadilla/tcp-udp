@@ -10,15 +10,15 @@ BEGIN {
 {
    time2 = $2;
 
-   if (time2 - time1 > 0.05) {
+   if (time2 - time1 > 0.5) {
       throughput = bytes_counter / (time2 - time1);
-      printf("%f \t %f\n", time2, throughput) > "throughput14.xls";
+      printf("%f \t %f\n", time2, throughput) > "throughput12.xls";
       time1 = $2;
       bytes_counter = 0;
    }
 
-   #if event is recieve and to-node is node 27 and paket type is cbr
-   if ($1 == "r" && $4 == node && $5 == "cbr") {
+   #if event is recieve and to-node is node 28 and paket type is cbr
+   if ($1 == "r" && $4 == node && $5 == "tcp" && $8 == 120280) {
       #add packet size to bytes_counter
       bytes_counter += $6;
       num_packets++;

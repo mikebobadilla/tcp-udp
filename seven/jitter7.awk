@@ -31,26 +31,23 @@ packet_id = $12;
 time2 = time;
 
 
-if(time2 - time1 > 0.5)
-{
 
-	if ( packet_id > highest_packet_id ) {
-
+	if ( packet_id > highest_packet_id && flow_id == 70190) {
 		highest_packet_id = packet_id;
-
 	}
 
 
 	#Record the transmission time
 
+	printf("%f\n", start_time[packet_id])
+
 	if ( start_time[packet_id] == 0 ) {
 
 		# Record the sequence number
 
-		pkt_seqno[packet_id] = seq_no;
-
 		start_time[packet_id] = time;
 
+		pkt_seqno[packet_id] = seq_no;
 	}
 
 
@@ -71,7 +68,6 @@ if(time2 - time1 > 0.5)
 		}
 
 		time1 = time;
-	}
 }
 
 
